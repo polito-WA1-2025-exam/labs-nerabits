@@ -84,4 +84,13 @@ const meme2 = new Meme(2, "meme2.jpg", [caption2, caption4, caption5]);
 memeCollection.add(meme1);
 memeCollection.add(meme2);
 
-  
+console.log("Meme:");
+memeCollection.getAll().forEach(meme => {
+  console.log(`ID: ${meme.id}, Image: ${meme.imageUrl}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+});
+
+
+console.log("\nCaptions:");
+captionCollection.getAll().forEach(caption => {
+  console.log(`ID: ${caption.id}, Text: ${caption.text}, Points: ${caption.points}`);
+});
