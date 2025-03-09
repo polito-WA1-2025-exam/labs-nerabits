@@ -58,4 +58,30 @@ function Game(id) {
     };
   }
   
+
+const memeCollection = new Collection();
+const captionCollection = new Collection();
+
+// creating captions
+const caption1 = new Caption(1, "When you test the deployment directly on production ", 3);
+const caption2 = new Caption(2, "When the manager says, 'It's just a small change, it'll be quick!", 2);
+const caption3 = new Caption(3, "When CI/CD fails, and you have no idea why!", 1);
+const caption4 = new Caption(4, "When the whole system is down, but monitoring shows no errors! ", 3);
+const caption5 = new Caption(5, "When you change one script, and suddenly the entire infrastructure breaks", 2);
+
+// Add captions to the collection
+captionCollection.add(caption1);
+captionCollection.add(caption2);
+captionCollection.add(caption3);
+captionCollection.add(caption4);
+captionCollection.add(caption5);
+
+// creating meme
+const meme1 = new Meme(1, "meme1.jpg", [caption1, caption2, caption3]);
+const meme2 = new Meme(2, "meme2.jpg", [caption2, caption4, caption5]);
+
+// Add meme to collection
+memeCollection.add(meme1);
+memeCollection.add(meme2);
+
   
