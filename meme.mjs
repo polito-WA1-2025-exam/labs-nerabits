@@ -86,7 +86,7 @@ memeCollection.add(meme2);
 
 console.log("Meme:");
 memeCollection.getAll().forEach(meme => {
-  console.log(`ID: ${meme.id}, Image: ${meme.imageUrl}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+  console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
 });
 
 
