@@ -99,16 +99,25 @@ const meme2 = new Meme(2, "meme2.jpg", [caption2, caption4, caption5]);
 memeCollection.add(meme1);
 memeCollection.add(meme2);
 
+// Display collections after adding new items
 console.log("Meme:");
 memeCollection.getAll().forEach(meme => {
   console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
 });
-
 
 console.log("\nCaptions:");
 captionCollection.getAll().forEach(caption => {
   console.log(`ID: ${caption.id}, Text: ${caption.text}, Points: ${caption.points}`);
 });
 
+//  Removing One Item 
+console.log("\n--- Removing Meme with ID 1 ---");
+memeCollection.remove(1);
+
+// Check collection after removal
+console.log("\nMemes after removing Meme with ID 1:");
+memeCollection.getAll().forEach(meme => {
+    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+});
 
 
