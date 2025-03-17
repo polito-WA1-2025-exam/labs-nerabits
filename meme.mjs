@@ -92,12 +92,15 @@ captionCollection.add(caption4);
 captionCollection.add(caption5);
 
 // creating meme
-const meme1 = new Meme(1, "meme1.jpg", [caption1, caption2, caption3]);
-const meme2 = new Meme(2, "meme2.jpg", [caption2, caption4, caption5]);
+const meme2 = new Meme(2, "meme2.jpg", [caption1, caption2, caption3]);
+const meme1 = new Meme(1, "meme1.jpg", [caption2, caption4, caption5]);
+const meme3 = new Meme(3, "meme3.jpg", [caption1, caption4, caption3]);
+
 
 // Add meme to collection
-memeCollection.add(meme1);
 memeCollection.add(meme2);
+memeCollection.add(meme1);
+memeCollection.add(meme3);
 
 // Display collections after adding new items
 console.log("Meme:");
@@ -111,8 +114,8 @@ captionCollection.getAll().forEach(caption => {
 });
 
 //  Removing One Item 
-console.log("\n--- Removing Meme with ID 1 ---");
-memeCollection.remove(1);
+console.log("\n--- Removing Meme with ID 3 ---");
+memeCollection.remove(3);
 
 // Check collection after removal
 console.log("\nMemes after removing Meme with ID 1:");
@@ -120,4 +123,10 @@ memeCollection.getAll().forEach(meme => {
     console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
 });
 
-
+// Sorting By ID
+console.log("\n--- Sorting Memes by ID ---");
+memeCollection.sortById();
+console.log("\nSorted Memes by ID:");
+memeCollection.getAll().forEach(meme => {
+    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+});
