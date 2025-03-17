@@ -130,3 +130,16 @@ console.log("\nSorted Memes by ID:");
 memeCollection.getAll().forEach(meme => {
     console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
 });
+
+
+// Filtering Memes With Captions ---
+console.log("\n--- Filtering Memes with Captions ---");
+const memesWithCaptions = memeCollection.filterMemesWithCaptions();
+console.log("\nMemes that have captions:");
+memesWithCaptions.forEach(meme => {
+    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+});
+
+// Check if all memes have captions
+console.log("\n--- Do all memes have captions? ---");
+console.log(memeCollection.allMemesHaveCaptions());
