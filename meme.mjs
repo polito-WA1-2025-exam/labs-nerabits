@@ -56,6 +56,21 @@ function Game(id) {
     this.getAll = function () {
       return this.items;
     };
+
+    // Sort items by ID
+    this.sortById = function () {
+      this.items.sort((a, b) => a.id - b.id);
+    };
+
+    // Filter memes that have captions
+    this.filterMemesWithCaptions = function () {
+      return this.items.filter(meme => meme.captions.length > 0);
+    };
+
+    // Check if all memes have at least one caption
+    this.allMemesHaveCaptions = function () {
+      return this.items.every(meme => meme.captions.length > 0);
+};
   }
   
 
@@ -94,3 +109,6 @@ console.log("\nCaptions:");
 captionCollection.getAll().forEach(caption => {
   console.log(`ID: ${caption.id}, Text: ${caption.text}, Points: ${caption.points}`);
 });
+
+
+
