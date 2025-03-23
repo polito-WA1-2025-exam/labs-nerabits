@@ -165,43 +165,90 @@ memeCollection.add(meme1);
 memeCollection.add(meme3);
 
 // Display collections after adding new items
-console.log("Meme:");
-memeCollection.getAll().forEach(meme => {
-  console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
-});
+//console.log("Meme:");
+//memeCollection.getAll().forEach(meme => {
+//  console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+//});
 
-console.log("\nCaptions:");
-captionCollection.getAll().forEach(caption => {
-  console.log(`ID: ${caption.id}, Text: ${caption.text}, Points: ${caption.points}`);
-});
+//console.log("\nCaptions:");
+//captionCollection.getAll().forEach(caption => {
+//  console.log(`ID: ${caption.id}, Text: ${caption.text}, Points: ${caption.points}`);
+//});
 
 //  Removing One Item 
-console.log("\n--- Removing Meme with ID 3 ---");
-memeCollection.remove(3);
+//console.log("\n--- Removing Meme with ID 3 ---");
+//memeCollection.remove(3);
 
 // Check collection after removal
-console.log("\nMemes after removing Meme with ID 1:");
-memeCollection.getAll().forEach(meme => {
-    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
-});
+//console.log("\nMemes after removing Meme with ID 1:");
+//memeCollection.getAll().forEach(meme => {
+//    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+//});
 
 // Sorting By ID
-console.log("\n--- Sorting Memes by ID ---");
-memeCollection.sortById();
-console.log("\nSorted Memes by ID:");
-memeCollection.getAll().forEach(meme => {
-    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
-});
+//console.log("\n--- Sorting Memes by ID ---");
+//memeCollection.sortById();
+//console.log("\nSorted Memes by ID:");
+//memeCollection.getAll().forEach(meme => {
+//    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+//});
 
 
 // Filtering Memes With Captions ---
-console.log("\n--- Filtering Memes with Captions ---");
-const memesWithCaptions = memeCollection.filterMemesWithCaptions();
-console.log("\nMemes that have captions:");
-memesWithCaptions.forEach(meme => {
-    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
-});
+//console.log("\n--- Filtering Memes with Captions ---");
+//const memesWithCaptions = memeCollection.filterMemesWithCaptions();
+//console.log("\nMemes that have captions:");
+//memesWithCaptions.forEach(meme => {
+//    console.log(`ID: ${meme.id}, Image: ${meme.image}, Captions: ${meme.captions.map(c => c.text).join(", ")}`);
+//});
 
 // Check if all memes have captions
-console.log("\n--- Do all memes have captions? ---");
-console.log(memeCollection.allMemesHaveCaptions());
+//console.log("\n--- Do all memes have captions? ---");
+//console.log(memeCollection.allMemesHaveCaptions());
+
+// Get all data from a specified table
+function getAllItemsFromTable(tableName) {
+  return new Promise((resolve, reject) => {
+    const sql = `SELECT * FROM ${tableName}`;
+    db.all(sql, [], (err, rows) => {
+      if (err) {
+        reject("Error retrieving data: " + err.message);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+}
+
+//Receiving data with a specific condition
+function getItemsByCondition(tableName, condition) {
+  return new Promise((resolve, reject) => {
+    const sql = `SELECT * FROM ${tableName} WHERE ${condition}`;
+    db.all(sql, [], (err, rows) => {
+      if (err) {
+        reject("Error retrieving data: " + err.message);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+}
+
+// Testing the functions
+//Get all data from the memes table
+getAllItemsFromTable('memes')
+  .then(data => {
+    console.log("All memes:", data);
+  })
+  .catch(err => {
+    console.error(err);
+  });
+
+// Get data from captions table with specific condition (e.g. points more than 2)
+getItemsByCondition('captions', 'points > 2')
+  .then(data => {
+    console.log("Captions with points greater than 2:", data);
+  })
+  .catch(err => {
+    console.error(err);
+  });
