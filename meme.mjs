@@ -253,6 +253,21 @@ function deleteMemeById(id) {
   });
 }
 
+function updateCaptionById(captionId, newText) {
+  return new Promise((resolve, reject) => {
+    const sql = 'UPDATE captions SET text = ? WHERE id = ?'; // SQL to update the 'text' of a caption with a given 'id'
+    db.run(sql, [newText, captionId], function(err) {
+      if (err) {
+        reject("Error updating caption in database: " + err.message);
+      } else if (this.changes === 0) {
+        reject("Caption with ID " + captionId + " not found.");
+      } else {
+        resolve("Caption with ID " + captionId + " updated successfully.");
+      }
+    });
+  });
+}
+
 
 // Testing the functions
 
@@ -264,6 +279,16 @@ deleteMemeById(4)
   .catch(err => {
     console.error(err); // Failure message if something goes wrong
   });
+
+  // Test function to update the caption text for caption with ID 1
+updateCaptionById(1, 'I am so funny in updating!!')
+.then(message => {
+  console.log("caption updated successfully"); // Confirmation: Caption updated successfully
+})
+.catch(err => {
+  console.error(err); // Failure message if caption not found or error occurs
+});
+
 
 //Get all data from the memes table
 getAllItemsFromTable('memes')
