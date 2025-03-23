@@ -141,7 +141,11 @@ const meme1 = new Meme(1, "meme1.jpg", [caption2, caption4, caption5]);
 const meme3 = new Meme(3, "meme3.jpg", [caption1, caption4, caption3]);
 const meme4 = new Meme(4, "meme4.jpg", [caption1, caption4, caption2]);
 
-
+// Add meme to collection
+memeCollection.add(meme2);
+memeCollection.add(meme1);
+memeCollection.add(meme3);
+memeCollection.add(meme4);
 
 Promise.all([
   addCaption(caption1),
@@ -162,11 +166,6 @@ Promise.all([
 }).catch(err => {
   console.error("Error adding data to database:", err);
 });
-// Add meme to collection
-memeCollection.add(meme2);
-memeCollection.add(meme1);
-memeCollection.add(meme3);
-memeCollection.add(meme4);
 
 // Display collections after adding new items
 //console.log("Meme:");
@@ -238,7 +237,34 @@ function getItemsByCondition(tableName, condition) {
   });
 }
 
+// Deleting an Item
+function deleteMemeById(id) {
+  return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM memes WHERE id = ?';
+    db.run(sql, [id], function(err) {
+      if (err) {
+        reject("Error deleting meme from database: " + err.message);
+      } else if (this.changes === 0) {
+        reject("Meme with ID " + id + " not found.");
+      } else {
+        resolve("Meme with ID " + id + " deleted successfully.");
+      }
+    });
+  });
+}
+
+
 // Testing the functions
+
+//Deleting an Item
+deleteMemeById(4)
+  .then(message => {
+    console.log("Item has been deleted"); // Confirmation message after deletion
+  })
+  .catch(err => {
+    console.error(err); // Failure message if something goes wrong
+  });
+
 //Get all data from the memes table
 getAllItemsFromTable('memes')
   .then(data => {
