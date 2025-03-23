@@ -139,6 +139,8 @@ captionCollection.add(caption5);
 const meme2 = new Meme(2, "meme2.jpg", [caption1, caption2, caption3]);
 const meme1 = new Meme(1, "meme1.jpg", [caption2, caption4, caption5]);
 const meme3 = new Meme(3, "meme3.jpg", [caption1, caption4, caption3]);
+const meme4 = new Meme(4, "meme4.jpg", [caption1, caption4, caption2]);
+
 
 
 Promise.all([
@@ -152,7 +154,8 @@ Promise.all([
   return Promise.all([
       addMeme(meme1),
       addMeme(meme2),
-      addMeme(meme3)
+      addMeme(meme3),
+      addMeme(meme4)
   ]);
 }).then(() => {
   console.log("Memes and captions added successfully.");
@@ -163,6 +166,7 @@ Promise.all([
 memeCollection.add(meme2);
 memeCollection.add(meme1);
 memeCollection.add(meme3);
+memeCollection.add(meme4);
 
 // Display collections after adding new items
 //console.log("Meme:");
