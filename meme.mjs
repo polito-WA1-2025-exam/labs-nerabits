@@ -1,3 +1,5 @@
+import db from './database.js';
+
 function Meme (id, image, captions){
     this.id = id;
     this.image = image;
@@ -72,7 +74,49 @@ function Game(id) {
       return this.items.every(meme => meme.captions.length > 0);
 };
   }
-  
+
+// Function to add caption
+  function addCaption(caption) {
+  return new Promise((resolve, reject) => {
+      db.run(`INSERT INTO captions (id, text, points) VALUES (?, ?, ?)`, [caption.id, caption.text, caption.points], function (err) {
+          if (err) {
+              reject(err);
+          } else {
+              resolve("Caption added successfully.");
+          }
+      });
+  });
+}
+
+// Function to add meme
+function addMeme(meme) {
+  return new Promise((resolve, reject) => {
+      db.run(`INSERT INTO memes (id, image) VALUES (?, ?)`, [meme.id, meme.image], function (err) {
+          if (err) {
+              reject(err);
+          } else {
+// After adding the meme, we also add the connection to the captions
+            meme.captions.forEach(caption => {
+                  addCaptionToMeme(meme.id, caption.id).then(resolve).catch(reject);
+              });
+          }
+      });
+  });
+}
+
+// Function to add relationship between memes and captions
+function addCaptionToMeme(memeId, captionId) {
+  return new Promise((resolve, reject) => {
+      db.run(`INSERT INTO meme_captions (meme_id, caption_id) VALUES (?, ?)`, [memeId, captionId], function (err) {
+          if (err) {
+              reject(err);
+          } else {
+              resolve("Caption added to meme.");
+          }
+      });
+  });
+}
+
 
 const memeCollection = new Collection();
 const captionCollection = new Collection();
@@ -97,6 +141,24 @@ const meme1 = new Meme(1, "meme1.jpg", [caption2, caption4, caption5]);
 const meme3 = new Meme(3, "meme3.jpg", [caption1, caption4, caption3]);
 
 
+Promise.all([
+  addCaption(caption1),
+  addCaption(caption2),
+  addCaption(caption3),
+  addCaption(caption4),
+  addCaption(caption5)
+]).then(() => {
+  // After adding captions, add the memes to the database.
+  return Promise.all([
+      addMeme(meme1),
+      addMeme(meme2),
+      addMeme(meme3)
+  ]);
+}).then(() => {
+  console.log("Memes and captions added successfully.");
+}).catch(err => {
+  console.error("Error adding data to database:", err);
+});
 // Add meme to collection
 memeCollection.add(meme2);
 memeCollection.add(meme1);
