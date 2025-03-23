@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
+  "name": "labs-nerabits",
+  "description": "## Members - s339794 SHAHIDZADEHASADI RANA - s339801 MOTAHARIFAR NEGIN",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polito-WA1-2025-exam/labs-nerabits.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/polito-WA1-2025-exam/labs-nerabits/issues"
+  },
+  "homepage": "https://github.com/polito-WA1-2025-exam/labs-nerabits#readme"
+}
