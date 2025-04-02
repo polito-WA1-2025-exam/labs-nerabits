@@ -31,7 +31,7 @@ This project uses an SQLite database to store memes, captions, and their relatio
    - `caption_id` (INTEGER, FOREIGN KEY REFERENCES captions(id))  
    - **PRIMARY KEY** (`meme_id`, `caption_id`) → Ensures unique meme-caption pairs.
 
-### 📌 Steps to Set Up the Database
+### Steps to Set Up the Database
 1. Install dependencies:  
    npm init -y
    npm install sqlite3
@@ -39,4 +39,10 @@ This project uses an SQLite database to store memes, captions, and their relatio
 2. Run the database setup script
    node database.js
 
-   
+### Steps to Set Up the Express
+1. Install dependencies: 
+   npm install express
+
+2. Run the server setup script
+   node server.js
+
