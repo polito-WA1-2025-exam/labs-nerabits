@@ -36,6 +36,20 @@ app.get('/memes', (req, res) => {
     });
 });
 
+// Get data from captions table with a specific condition (e.g. points > 2)
+app.get('/captions/points-more-than-2', (req, res) => {
+    // Define the condition: points greater than 2
+    const condition = 'points > 2';
+
+    // Query the database with the condition
+    db.all(`SELECT * FROM captions WHERE ${condition}`, (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: 'There is a problem receiving data.' });
+        } else {
+            res.json(rows);  // Respond with the data
+        }
+    });
+});
 // Run the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

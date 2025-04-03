@@ -1,1 +1,1 @@
-GET http://localhost:3000/memes HTTP/1.1
+GET http://localhost:3000/captions/points-more-than-2
