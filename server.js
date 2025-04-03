@@ -50,6 +50,25 @@ app.get('/captions/points-more-than-2', (req, res) => {
         }
     });
 });
+
+// API to get a specific meme by ID
+app.get('/api/memes/:id', (req, res) => {
+    const memeId = req.params.id;
+
+    // SQL query to get a specific meme
+    const sql = `SELECT * FROM memes WHERE id = ?`;
+
+    db.get(sql, [memeId], (err, row) => {
+        if (err) {
+            res.status(500).json({ error: 'Error retrieving information from the database.' });
+        } else if (row) {
+            res.status(200).json(row);
+        } else {
+            res.status(404).json({ error: ` meme with ID ${memeId} not found` });
+        }
+    });
+});
+
 // Run the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
