@@ -5,6 +5,9 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
+// Middleware to parse JSON in request body
+app.use(express.json());
+
 //connecting to database
 const dbPath = path.join(__dirname, 'memeGame.db');
 const db = new sqlite3.Database(dbPath, (err) => {
@@ -66,6 +69,59 @@ app.get('/api/memes/:id', (req, res) => {
         } else {
             res.status(404).json({ error: ` meme with ID ${memeId} not found` });
         }
+    });
+});
+
+// Insert a new meme
+app.post('/api/memes', (req, res) => {
+    const { image } = req.body;
+
+    // Validate input
+    if (!image) {
+        return res.status(400).json({ error: "Image URL is required." });
+    }
+
+    const sql = `INSERT INTO memes (image) VALUES (?)`;
+    db.run(sql, [image], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(201).json({ id: this.lastID, image });
+    });
+});
+
+// Insert a new caption
+app.post('/api/captions', (req, res) => {
+    const { text, points } = req.body;
+
+    // Validate input
+    if (!text || points === undefined) {
+        return res.status(400).json({ error: "Text and points are required." });
+    }
+
+    const sql = `INSERT INTO captions (text, points) VALUES (?, ?)`;
+    db.run(sql, [text, points], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(201).json({ id: this.lastID, text, points });
+    });
+});
+// Link a meme to a caption
+app.post('/api/meme_captions', (req, res) => {
+    const { meme_id, caption_id } = req.body;
+
+    // Validate input
+    if (!meme_id || !caption_id) {
+        return res.status(400).json({ error: "Meme ID and Caption ID are required." });
+    }
+
+    const sql = `INSERT INTO meme_captions (meme_id, caption_id) VALUES (?, ?)`;
+    db.run(sql, [meme_id, caption_id], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(201).json({ message: "Meme linked with caption successfully." });
     });
 });
 

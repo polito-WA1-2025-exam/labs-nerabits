@@ -1,1 +1,9 @@
-GET http://localhost:3000/captions/points-more-than-2
+POST http://localhost:3000/api/memes
+Content-Type: application/json
+
+{
+  "title": "Funny Cat",
+  "imageUrl": "https://example.com/cat.jpg",
+  "caption": "When you see the weekend coming...",
+  "userId": 1
+}
