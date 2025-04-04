@@ -1,25 +1,16 @@
-### POST /api/memes
-POST http://localhost:3000/api/memes HTTP/1.1
+### Update a Meme (Change Image)
+PUT http://localhost:3000/api/memes/6
 Content-Type: application/json
 
 {
-    "image": "meme6.jpg"
+    "image": "new-meme6.jpg"
 }
 
-### POST /api/captions
-POST http://localhost:3000/api/captions HTTP/1.1
+### Update a Caption (Change Text and Points)
+PUT http://localhost:3000/api/captions/1
 Content-Type: application/json
 
 {
-    "text": "Funny meme!",
-    "points": 10
-}
-
-### POST /api/meme_captions
-POST http://localhost:3000/api/meme_captions HTTP/1.1
-Content-Type: application/json
-
-{
-    "meme_id": 6,
-    "caption_id": 7
+    "text": "Testing",
+    "points": 15
 }
