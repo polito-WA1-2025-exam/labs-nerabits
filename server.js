@@ -18,11 +18,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
 });
 
-//// Server startup
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
 // Test root
 app.get('/', (req, res) => {
     res.send('Meme Game API is working');
@@ -124,6 +119,51 @@ app.post('/api/meme_captions', (req, res) => {
         res.status(201).json({ message: "Meme linked with caption successfully." });
     });
 });
+
+//updating an existing item by providing all its properties except the id.
+
+app.put('/api/memes/:id', (req, res) => {
+    const memeId = req.params.id;
+    const { image } = req.body;  // Expecting the "image" field only
+
+    if (!image) {
+        return res.status(400).json({ error: 'Image URL is required.' });
+    }
+
+    const query = `UPDATE memes SET image = ? WHERE id = ?`;
+
+    db.run(query, [image, memeId], function (err) {
+        if (err) {
+            res.status(500).json({ error: 'Error updating meme.' });
+        } else if (this.changes === 0) {
+            res.status(404).json({ error: `Meme with ID ${memeId} not found.` });
+        } else {
+            res.status(200).json({ message: 'Meme updated successfully.' });
+        }
+    });
+});
+
+app.put('/api/captions/:id', (req, res) => {
+    const captionId = req.params.id;
+    const { text, points } = req.body;  // Expecting "text" and "points" fields
+
+    if (!text || points === undefined) {
+        return res.status(400).json({ error: 'Both text and points are required.' });
+    }
+
+    const query = `UPDATE captions SET text = ?, points = ? WHERE id = ?`;
+
+    db.run(query, [text, points, captionId], function (err) {
+        if (err) {
+            res.status(500).json({ error: 'Error updating caption.' });
+        } else if (this.changes === 0) {
+            res.status(404).json({ error: `Caption with ID ${captionId} not found.` });
+        } else {
+            res.status(200).json({ message: 'Caption updated successfully.' });
+        }
+    });
+});
+
 
 // Run the server
 app.listen(PORT, () => {

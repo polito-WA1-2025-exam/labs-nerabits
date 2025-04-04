@@ -1,9 +1,25 @@
-POST http://localhost:3000/api/memes
+### POST /api/memes
+POST http://localhost:3000/api/memes HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "Funny Cat",
-  "imageUrl": "https://example.com/cat.jpg",
-  "caption": "When you see the weekend coming...",
-  "userId": 1
+    "image": "meme6.jpg"
+}
+
+### POST /api/captions
+POST http://localhost:3000/api/captions HTTP/1.1
+Content-Type: application/json
+
+{
+    "text": "Funny meme!",
+    "points": 10
+}
+
+### POST /api/meme_captions
+POST http://localhost:3000/api/meme_captions HTTP/1.1
+Content-Type: application/json
+
+{
+    "meme_id": 6,
+    "caption_id": 7
 }
