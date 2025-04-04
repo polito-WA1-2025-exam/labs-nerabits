@@ -1,7 +1,7 @@
-//Update Only image of Meme id=6
-PATCH http://localhost:3000/api/memes/6
+//Update Only points of Caption id=3
+PATCH http://localhost:3000/api/captions/3
 Content-Type: application/json
 
 {
-    "image": "new-image-new.jpg"
+    "points": 13
 }
