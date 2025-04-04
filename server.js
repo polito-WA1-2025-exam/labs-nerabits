@@ -164,6 +164,64 @@ app.put('/api/captions/:id', (req, res) => {
     });
 });
 
+//updating just one or more attributes without sending the entire object
+app.patch('/api/memes/:id', (req, res) => {
+    const memeId = req.params.id;
+    const { image } = req.body;
+
+    if (!image) {
+        return res.status(400).json({ error: "At least one field (image) must be provided for update." });
+    }
+
+    const query = `UPDATE memes SET image = ? WHERE id = ?`;
+
+    db.run(query, [image, memeId], function (err) {
+        if (err) {
+            console.error("Error updating meme:", err.message);
+            res.status(500).json({ error: 'Error updating meme.' });
+        } else if (this.changes === 0) {
+            res.status(404).json({ error: `Meme with ID ${memeId} not found.` });
+        } else {
+            res.status(200).json({ message: 'Meme updated successfully.' });
+        }
+    });
+});
+
+app.patch('/api/captions/:id', (req, res) => {
+    const captionId = req.params.id;
+    const { text, points } = req.body;
+
+    if (text === undefined && points === undefined) {
+        return res.status(400).json({ error: "At least one field (text or points) must be provided for update." });
+    }
+
+    let query = 'UPDATE captions SET ';
+    const params = [];
+    
+    if (text !== undefined) {
+        query += 'text = ?, ';
+        params.push(text);
+    }
+    if (points !== undefined) {
+        query += 'points = ?, ';
+        params.push(points);
+    }
+
+    query = query.slice(0, -2); // Remove the last comma
+    query += ' WHERE id = ?';
+    params.push(captionId);
+
+    db.run(query, params, function (err) {
+        if (err) {
+            console.error("Error updating caption:", err.message);
+            res.status(500).json({ error: 'Error updating caption.' });
+        } else if (this.changes === 0) {
+            res.status(404).json({ error: `Caption with ID ${captionId} not found.` });
+        } else {
+            res.status(200).json({ message: 'Caption updated successfully.' });
+        }
+    });
+});
 
 // Run the server
 app.listen(PORT, () => {

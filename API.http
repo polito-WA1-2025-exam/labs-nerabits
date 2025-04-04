@@ -1,16 +1,7 @@
-### Update a Meme (Change Image)
-PUT http://localhost:3000/api/memes/6
+//Update Only image of Meme id=6
+PATCH http://localhost:3000/api/memes/6
 Content-Type: application/json
 
 {
-    "image": "new-meme6.jpg"
-}
-
-### Update a Caption (Change Text and Points)
-PUT http://localhost:3000/api/captions/1
-Content-Type: application/json
-
-{
-    "text": "Testing",
-    "points": 15
+    "image": "new-image-new.jpg"
 }
