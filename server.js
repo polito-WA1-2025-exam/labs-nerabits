@@ -223,6 +223,24 @@ app.patch('/api/captions/:id', (req, res) => {
     });
 });
 
+//Delete a meme
+app.delete('/api/memes/:id', (req, res) => {
+    const memeId = req.params.id;
+
+    const query = `DELETE FROM memes WHERE id = ?`;
+
+    db.run(query, [memeId], function (err) {
+        if (err) {
+            console.error("Error deleting meme:", err.message);
+            res.status(500).json({ error: 'Error deleting meme.' });
+        } else if (this.changes === 0) {
+            res.status(404).json({ error: `Meme with ID ${memeId} not found.` });
+        } else {
+            res.status(200).json({ message: 'Meme deleted successfully.' });
+        }
+    });
+});
+
 // Run the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
