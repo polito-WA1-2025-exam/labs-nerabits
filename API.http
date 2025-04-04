@@ -1,7 +1,8 @@
-//Update Only points of Caption id=3
+//Update Both text and points of Caption id=3
 PATCH http://localhost:3000/api/captions/3
 Content-Type: application/json
 
 {
-    "points": 13
+    "text": "Updated Caption for patch",
+    "points": 8
 }
