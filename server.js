@@ -241,6 +241,24 @@ app.delete('/api/memes/:id', (req, res) => {
     });
 });
 
+//Delete a caption
+app.delete('/api/captions/:id', (req, res) => {
+    const captionId = req.params.id;
+
+    const query = `DELETE FROM captions WHERE id = ?`;
+
+    db.run(query, [captionId], function (err) {
+        if (err) {
+            console.error("Error deleting caption:", err.message);
+            res.status(500).json({ error: 'Error deleting caption.' });
+        } else if (this.changes === 0) {
+            res.status(404).json({ error: `Caption with ID ${captionId} not found.` });
+        } else {
+            res.status(200).json({ message: 'Caption deleted successfully.' });
+        }
+    });
+});
+
 // Run the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

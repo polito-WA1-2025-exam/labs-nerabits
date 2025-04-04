@@ -1,1 +1,1 @@
-DELETE http://localhost:3000/api/memes/6
+DELETE http://localhost:3000/api/captions/7
