@@ -1,0 +1,35 @@
+/* Body background */
+body {
+  background-color: lightblue !important;
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Spacing for icons in titles and footers */
+.card-title i {
+  margin-right: 8px;
+  color: #ff5722; /* Accent color */
+}
+
+.card-footer i {
+  margin-right: 6px;
+  color: #0d6efd; /* Bootstrap primary blue */
+}
+
+/* Padding at bottom of container */
+.container {
+  padding-bottom: 40px;
+}
+
+/* Navbar brand icon styling */
+.navbar-brand i {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: #ffc107; /* Warm gold color */
+}
+
