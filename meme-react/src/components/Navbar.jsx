@@ -9,17 +9,17 @@ const MemeNavbar = () => {
         <Navbar.Brand href="#" className="d-flex align-items-center">
           <CameraReelsFill size={28} className="me-2" />
           <span style={{ fontWeight: "700", fontSize: "1.4rem", letterSpacing: "1px" }}>
-            Meme Gallery
+            Meme Game
           </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="#home" className="text-uppercase fw-semibold">
-              Home
+              Play
             </Nav.Link>
-            <Nav.Link href="#features" className="text-uppercase fw-semibold">
-              Features
+            <Nav.Link href="#leaderboard" className="text-uppercase fw-semibold">
+              Leaderboard
             </Nav.Link>
             <Nav.Link href="#about" className="text-uppercase fw-semibold">
               About
