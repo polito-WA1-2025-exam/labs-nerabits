@@ -1,21 +1,7 @@
-import React from 'react';
-import { Row, Col } from 'react-bootstrap';
-import MemeCard from './MemeCard';
-
-const MemeList = ({ memes, onEditMeme, onVoteMeme }) => {
+export default function MemeList() {
   return (
-    <Row xs={1} md={3} className="g-4">
-      {memes.map(meme => (
-        <Col key={meme.id}>
-          <MemeCard 
-            meme={meme} 
-            onEdit={onEditMeme}
-            onVote={onVoteMeme} 
-          />
-        </Col>
-      ))}
-    </Row>
+    <div>
+      <h2>Meme List Page</h2>
+    </div>
   );
-};
-
-export default MemeList;
+}

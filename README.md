@@ -213,3 +213,14 @@ Ensure the database (`memeGame.db`) is properly initialized before running the s
 
 
 
+
+### React Application Routes
+
+| Path            | Purpose                            | Components Rendered         |
+|-----------------|-------------------------------------|-----------------------------|
+| `/login`        | Login page for registered users     | `LoginForm`                 |
+| `/play`         | Single game round (anonymous or registered) | `GameRound`       |
+| `/game-summary` | Summary after 3 rounds (registered users) | `GameSummary`      |
+| `/profile`      | View score history and past games   | `UserProfile`               |
+| `*`             | Invalid URL                         | `NotFoundPage`              |
+
